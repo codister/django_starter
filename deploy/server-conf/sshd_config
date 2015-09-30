@@ -31,7 +31,6 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 Port 23232
 PasswordAuthentication no
 UsePAM no
-AllowUsers root
 PermitRootLogin without-password
 
 
