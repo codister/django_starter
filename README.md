@@ -184,19 +184,48 @@ This synchronizes the contents of your django_starter folder to your server's /h
 
 ### Create the virtualenv
 
+On the server:
+
 	cd /home/starter/web/app
 	virtualenv venv
 	venv/bin/pip install -r requirements/production.txt
+		
+### Copy the config files
+
+On the server:
+
+	cp /home/starter/web/app/deploy/site-conf/starter.supervisord.conf /etc/supervisor/conf.d/
+	mkdir -p /etc/nginx/sites/
+	cp /home/starter/web/app/deploy/site-conf/starter.nginx.conf /etc/nginx/sites/
 	
-
 	
+### Change all files's owner to starter 
 
-supervisor /etc/supervisor/conf.d/*.conf
+On the server:
+
+	chown -R starter:starter /home/starter
+
+### Restore the database
+
+On the server:
+
+	su - starter
+	cd web/app/db/
+	./restore.sh
 
 
+### Run Django's collectstatic
 
+Still as starter user:
 
+	cd ../project/
+	DJANGO_SETTINGS_MODULE=config.settings.production ../venv/bin/python manage.py collectstatic --link --noinput
 
+Press Ctrl + D to exit the su session.
 
+### Start the server
 
+	supervisorctl update
+	supervisorctl restart starter
+	service nginx reload
 

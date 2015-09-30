@@ -6,7 +6,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 SECRET_KEY = 'u%##f(g^-6t$40_gf)z2ic$!7q)lt^!v5jg6h##($n%hr!o@(k'
-ALLOWED_HOSTS = ['subdomain.myhost.com']
+ALLOWED_HOSTS = ['djangostarter.com']
 
 DATABASES = {
     'default': {
