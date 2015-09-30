@@ -495,6 +495,7 @@ SELECT pg_catalog.setval('auth_permission_id_seq', 21, true);
 --
 
 COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$20000$zyU2VEXm3dHB$ekzGxEcOrJv6Ml1cD2+qdrNtm7Y/RUfiG2rvuoJk3hE=	2015-09-30 17:47:25.186784+02	t	starter				t	t	2015-09-30 17:46:52.789328+02
 \.
 
 
@@ -517,7 +518,7 @@ SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
 -- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('auth_user_id_seq', 1, false);
+SELECT pg_catalog.setval('auth_user_id_seq', 1, true);
 
 
 --
@@ -540,6 +541,9 @@ SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
 --
 
 COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2015-09-30 17:47:35.148909+02	1	One	1		7	1
+2	2015-09-30 17:47:37.724356+02	2	Two	1		7	1
+3	2015-09-30 17:47:43.860762+02	3	Super!	1		7	1
 \.
 
 
@@ -547,7 +551,7 @@ COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, cha
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 1, false);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 3, true);
 
 
 --
@@ -603,6 +607,9 @@ SELECT pg_catalog.setval('django_migrations_id_seq', 11, true);
 --
 
 COPY starter_app_message (id, "order", text) FROM stdin;
+1	1	One
+2	2	Two
+3	3	Super!
 \.
 
 
@@ -610,7 +617,7 @@ COPY starter_app_message (id, "order", text) FROM stdin;
 -- Name: starter_app_message_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('starter_app_message_id_seq', 1, false);
+SELECT pg_catalog.setval('starter_app_message_id_seq', 3, true);
 
 
 --
