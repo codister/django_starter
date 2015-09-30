@@ -124,7 +124,7 @@ Is the information correct? [Y/n]
 
 ### Install and configure PostgreSQL
 
-Run `apt-get install postgresql-9.3`, press y when asked.
+On your server, run `apt-get install postgresql-9.3`, press y when asked.
 
 Change PostgreSQL authentication settings:
 
@@ -144,7 +144,7 @@ Press Ctrl + D to return to the root session.
 
 ### Install and configure Nginx
 
-Run `apt-get install nginx` and press y when asked.
+On your server, run `apt-get install nginx` and press y when asked.
 
 Upload the nginx configs. Run the scp commands on your computer from `deploy/server-conf/`:
 
@@ -155,9 +155,43 @@ On the server, restart nginx
 
 	service nginx restart
 	
+### Install various packages
+
+On your server, run `apt-get install supervisor python-virtualenv python-dev libpq-dev build-essential` and press y when asked.
 
 
+## Set up the Django project
 
+### Create the directories for the project
+
+On the server, run the following commands:
+
+	cd /home/starter/
+	mkdir -p web/logs web/media web/static	
+
+### Clone / upload your project to the server
+
+You can either upload your project by a rsync, or using a GUI app (like WinSCP), or by settings up Git deployment (read-only) keys for your server on Github / Bitbucket.
+
+I recommend setting up Git deployment keys, but it'd be outside the scope of this tutorial, so we will just use rsync to copy our project files to the server.
+
+Run the following command on your computer:
+
+	cd .. # until you are outside django_starter project
+	rsync -avz --delete django_starter/ my-little-server:/home/starter/web/app/
+	
+This synchronizes the contents of your django_starter folder to your server's /home/starter/web/app/ folder.
+
+### Create the virtualenv
+
+	cd /home/starter/web/app
+	virtualenv venv
+	venv/bin/pip install -r requirements/production.txt
+	
+
+	
+
+supervisor /etc/supervisor/conf.d/*.conf
 
 
 
